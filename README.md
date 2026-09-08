@@ -1,6 +1,5 @@
 # AEXUM
 
-Public site built from https://github.com/neotheliberator/Grok-Website
+Live: https://neotheliberator.github.io/
 
-Enable Pages: Settings → Pages → Deploy from a branch → main → / (root)
-Then the site is live at https://neotheliberator.github.io/
+Source: https://github.com/neotheliberator/Grok-Website
