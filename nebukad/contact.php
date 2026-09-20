@@ -48,14 +48,38 @@ rewind($file); ftruncate($file, 0);
 $saved = fwrite($file, json_encode($entries));
 fflush($file); flock($file, LOCK_UN); fclose($file);
 if ($saved === false) respond(503, 'unavailable');
-$recipient = 'info@nebukad-international.com';
-$body = "Name: $name\nE-Mail: $email\n\n$message";
-$headers = [
-    'From' => 'Nebukad Website <info@nebukad-international.com>',
-    'Reply-To' => $email,
-    'MIME-Version' => '1.0',
-    'Content-Type' => 'text/plain; charset=UTF-8',
-    'Content-Transfer-Encoding' => 'base64'
-];
-$sent = function_exists('mail') && @mail($recipient, 'Nebukad Website - Kontakt / Contact', chunk_split(base64_encode($body)), $headers, '-finfo@nebukad-international.com');
-respond($sent ? 200 : 503, $sent ? 'accepted' : 'unavailable');
+// Credentials live outside the domain's document root and are never committed.
+try {
+    $configPath = dirname(__DIR__) . '/nebukad-private/smtp-password.php';
+    if (!is_file($configPath)) respond(503, 'smtp_config');
+    $password = require $configPath;
+    if (!is_string($password) || $password === '' || $password === 'HIER_POSTFACHPASSWORT_EINTRAGEN') {
+        respond(503, 'smtp_config');
+    }
+    require_once __DIR__ . '/mail-lib/Exception.php';
+    require_once __DIR__ . '/mail-lib/PHPMailer.php';
+    require_once __DIR__ . '/mail-lib/SMTP.php';
+    $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+    $mail->isSMTP();
+    $mail->Host = 'smtp.ionos.de';
+    $mail->Port = 465;
+    $mail->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+    $mail->SMTPAuth = true;
+    $mail->Username = 'info@nebukad-international.com';
+    $mail->Password = $password;
+    $mail->SMTPDebug = 0;
+    $mail->Timeout = 10;
+    $mail->Timelimit = 10;
+    $mail->CharSet = 'UTF-8';
+    $mail->Encoding = 'base64';
+    $mail->setFrom($mail->Username, 'Nebukad Website');
+    $mail->addAddress($mail->Username);
+    $mail->addReplyTo($email, $name);
+    $mail->Subject = 'Nebukad Website - Kontakt / Contact';
+    $mail->Body = "Name: $name\nE-Mail: $email\n\n$message";
+    $mail->send();
+    respond(200, 'accepted');
+} catch (\Throwable $error) {
+    // No SMTP transcript, credentials or visitor data in responses/logs.
+    respond(503, 'smtp_failed');
+}
