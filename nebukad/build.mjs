@@ -47,7 +47,7 @@ const privacySections = {
     ],
     [
       "Hosting und technische Bereitstellung",
-      "Die Website und unser E-Mail-Postfach werden bei IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, Deutschland, betrieben. Die Bereitstellung erfolgt über den IONOS-Vertrag der Diplom Wirtschaftsjuristen Kanzlei Ferger UG (haftungsbeschränkt), Buchenweg 3, 35684 Dillenburg, Deutschland. Die Kanzlei ist als Vertragsinhaberin in die technische Bereitstellung eingebunden. Verantwortlich für diese Website bleibt Nebukad International. Zu den Empfängern der im Rahmen des Betriebs verarbeiteten Daten gehören IONOS und, soweit für die technische Verwaltung erforderlich, die Kanzlei Ferger."
+      "Die Website und unser E-Mail-Postfach werden bei IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, Deutschland, betrieben. IONOS verarbeitet dabei die für die Bereitstellung von Website und E-Mail-Diensten erforderlichen Daten. Die Verwaltung der Website und des Postfachs sowie die Bearbeitung von Kontaktanfragen erfolgen durch die hierfür zuständigen Personen für Nebukad International."
     ],
     [
       "Aufruf der Website und Serverprotokolle",
@@ -97,7 +97,7 @@ const privacySections = {
     ],
     [
       "Hosting and technical provision",
-      "The website and our email mailbox are hosted by IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, Germany. They are provided through the IONOS contract held by Diplom Wirtschaftsjuristen Kanzlei Ferger UG (haftungsbeschränkt), Buchenweg 3, 35684 Dillenburg, Germany. As the account holder, Kanzlei Ferger is involved in the technical provision. Nebukad International remains the controller for this website. Recipients of data processed in operating the service include IONOS and, where needed for technical administration, Kanzlei Ferger."
+      "The website and our email mailbox are hosted by IONOS SE, Elgendorfer Str. 57, 56410 Montabaur, Germany. IONOS processes the data required to provide the website and email services. The website and mailbox are administered, and contact enquiries handled, by the people responsible for these tasks on behalf of Nebukad International."
     ],
     [
       "Website requests and server logs",
