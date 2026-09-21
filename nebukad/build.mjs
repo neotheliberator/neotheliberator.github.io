@@ -24,14 +24,14 @@ const words = {
 const routes = ['index','schutzrechte','kontakt','impressum','datenschutz'];
 function link(slug,lang){return `${slug}${lang==='en'?'.en':''}.html`;}
 function anchor(slug,lang,label,attr=''){return `<a href="${link(slug,lang)}" ${attr}>${label}</a>`;}
-function intro(label,title,desc){return `<section class="page-intro container"><p class="eyebrow">Nebukad International / ${label}</p><h1>${title}</h1><p class="lead">${desc}</p></section>`;}
+function intro(label,title,desc){return `<section class="page-intro container"><p class="eyebrow">Nebukad International / ${label}</p><h1>${title}</h1>${desc?`<p class="lead">${desc}</p>`: ''}</section>`;}
 function home(w,lang){return `<section class="hero container"><div><p class="eyebrow">${w.eyebrow}</p><h1>${w.hero}</h1><p class="lead">${w.lead}</p><a class="text-link" href="#unternehmen">${w.learn} <span aria-hidden="true">↓</span></a></div><img class="seal" src="assets/nebukad-logo.svg" width="1244" height="1265" alt="Nebukad International" fetchpriority="high"></section>
 <section id="unternehmen" class="company container"><p class="eyebrow">${w.companyLabel}</p><div><h2>${w.companyTitle}</h2><p>${w.companyText}</p></div></section>
 <section class="brand"><div class="container"><div><p class="eyebrow">${w.brandLabel}</p><h2 class="brand-name brand-logo-heading"><img class="neo-logo" src="assets/neo-tackle-white.svg" width="1564" height="624" alt="NEO TACKLE"></h2><p class="tagline">Thinking Systems.</p></div><div><h2>${w.brandTitle}</h2><p>${w.brandText}</p><p class="attribution">${w.brandFoot}</p></div></div></section>
 <section id="gruender" class="founders container"><p class="eyebrow">${w.foundersLabel}</p><h2>${w.foundersTitle}</h2><div class="founder-grid"><article><h3>Benjamin Ferger</h3><p class="eyebrow">${w.benRole}</p><p>${w.ben}</p></article><article><h3>Husni Celik</h3><p class="eyebrow">${w.husniRole}</p><p>${w.husni}</p></article></div></section>
 <section class="rights-intro container"><p class="eyebrow">${w.rightsLabel}</p><h2>${w.rightsTitle}</h2><p>${w.rightsText}</p>${anchor('schutzrechte',lang,w.rightsLink+' →','class="text-link"')}</section>`;}
 function rights(w){return intro(w.nav[1],w.ipTitle,w.ipIntro)+`<div class="container page-content"><div class="table-wrap" tabindex="0" role="region" aria-label="${w.nav[1]}"><table><caption>${w.tableNote}</caption><thead><tr>${w.cols.map(c=>`<th scope="col">${c}</th>`).join('')}</tr></thead><tbody>${w.types.map(t=>`<tr><td>${t}</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>`).join('')}</tbody></table></div></div>`;}
-function legalNotice(w,lang){const de=lang==='de';return intro(w.legal,w.legal,company)+`<section class="container page-content"><div class="prose"><p>Nebukad International UG (haftungsbeschränkt)<br>Buchenweg 3<br>35684 Dillenburg<br>${de?'Deutschland':'Germany'}</p><h2>${de?'Geschäftsführer':'Managing directors'}</h2>${de?'<p>Diplom-Wirtschaftsjurist, Diplom-Kaufmann Benjamin Ferger<br>Rechtsanwalt Husni Celik</p>':'<p>Benjamin Ferger<br>Diplom-Kaufmann (German university diploma in Business Administration)<br>Diplom-Wirtschaftsjurist (German university diploma in Business Law)</p><p>Husni Celik<br>Lawyer</p>'}<h2>${de?'Registerangaben':'Registration details'}</h2><p>${de?'Registergericht':'Register court'}: Amtsgericht Wetzlar<br>${de?'Handelsregister':'Commercial register'}: HRB 9671</p><h2>${de?'Umsatzsteuer-Identifikationsnummer':'VAT identification number'}</h2><p>DE462594673</p><h2>${de?'Kontakt':'Contact'}</h2><p><a href="mailto:info@nebukad-international.com">info@nebukad-international.com</a></p></div></section>`;}
+function legalNotice(w,lang){const de=lang==='de';return intro(w.legal,w.legal,'')+`<section class="container page-content"><div class="prose"><p>Nebukad International UG (haftungsbeschränkt)<br>Buchenweg 3<br>35684 Dillenburg<br>${de?'Deutschland':'Germany'}</p><h2>${de?'Geschäftsführer':'Managing directors'}</h2>${de?'<p>Diplom-Wirtschaftsjurist, Diplom-Kaufmann Benjamin Ferger<br>Rechtsanwalt Husni Celik</p>':'<p>Benjamin Ferger<br>Diplom-Kaufmann (German university diploma in Business Administration)<br>Diplom-Wirtschaftsjurist (German university diploma in Business Law)</p><p>Husni Celik<br>Lawyer</p>'}<h2>${de?'Registerangaben':'Registration details'}</h2><p>${de?'Registergericht':'Register court'}: Amtsgericht Wetzlar<br>${de?'Handelsregister':'Commercial register'}: HRB 9671</p><h2>${de?'Umsatzsteuer-Identifikationsnummer':'VAT identification number'}</h2><p>DE462594673</p><h2>${de?'Kontakt':'Contact'}</h2><p><a href="mailto:info@nebukad-international.com">info@nebukad-international.com</a></p></div></section>`;}
 
 const privacySections = {
   "de": [
@@ -78,10 +78,6 @@ const privacySections = {
     [
       "Automatisierte Entscheidungen und Geltungsbereich",
       "Wir treffen keine ausschließlich automatisierten Entscheidungen mit rechtlicher oder vergleichbar erheblicher Wirkung und betreiben kein entsprechendes Profiling. Diese Erklärung betrifft die Unternehmenswebsite."
-    ],
-    [
-      "Gesonderte GitHub-Vorschau",
-      "Nur wenn Sie die gesonderte Vorschau unter neotheliberator.github.io/nebukad/ aufrufen, wird diese über GitHub Pages bereitgestellt. GitHub verarbeitet dabei unter anderem IP-Adressen zur Sicherheit. Der Formularversand ist dort deaktiviert. Informationen hierzu finden Sie in der <a href=\"https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement\">GitHub-Datenschutzerklärung</a>. Der Betrieb unter nebukad-international.com erfolgt bei IONOS."
     ]
   ],
   "en": [
@@ -128,10 +124,6 @@ const privacySections = {
     [
       "Automated decisions and scope",
       "We do not make solely automated decisions with legal or similarly significant effects or conduct related profiling. This notice covers the company website."
-    ],
-    [
-      "Separate GitHub preview",
-      "Only the separate preview at neotheliberator.github.io/nebukad/ is hosted on GitHub Pages. GitHub processes IP addresses, among other data, for security. Form submission is disabled on that preview. See the <a href=\"https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement\">GitHub privacy statement</a>. The website at nebukad-international.com is hosted by IONOS."
     ]
   ]
 };
